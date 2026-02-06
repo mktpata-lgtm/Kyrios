@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrios Sport | Calzado Deportivo Semiprofesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-black: #0a0a0a;
+            --accent-red: #ff0033;
+            --accent-cyan: #00ffff;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --card-bg: #141414;
+        }
+
+        body {
+            font-family: 'Michroma', 'Arial Narrow', sans-serif;
+            background: var(--bg-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 51, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(255, 0, 51, 0.2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5)); }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            animation: slideDown 1s ease-out;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero .accent {
+            color: var(--accent-red);
+            text-shadow: 0 0 20px rgba(255, 0, 51, 0.5);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-cyan));
+            margin: 20px auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-cyan));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .product-info {
+            padding: 30px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .product-model {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .product-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features li::before {
+            content: '▸';
+            color: var(--accent-red);
+            margin-right: 10px;
+        }
+
+        /* Tech Specs Section */
+        .tech-specs {
+            background: linear-gradient(135deg, rgba(255, 0, 51, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
+            padding: 80px 0;
+            margin: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .spec-item {
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            background: rgba(20, 20, 20, 0.8);
+            border-color: var(--accent-red);
+            transform: translateY(-5px);
+        }
+
+        .spec-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .spec-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+
+        .spec-desc {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer .logo {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation delays for staggered effect */
+        .product-card:nth-child(1) {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .product-card:nth-child(2) {
+            animation: slideUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .product-card:nth-child(3) {
+            animation: slideUp 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="container">
+            <div class="logo">KYRIOS SPORT</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>RENDIMIENTO <span class="accent">SUPERIOR</span></h1>
+            <p class="subtitle">CALZADO DEPORTIVO SEMIPROFESIONAL</p>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Colección de Corrida</h2>
+            
+            <div class="product-grid">
+                <!-- Product 1: All Black -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/0764/0082/0470/files/1.jpg?v=1770314734" viewBox='0 0 400 300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' fill='%23444' text-anchor='middle'%3EKYRIOS RUNNER PRO%3C/text%3E%3C/svg%3E" alt="Kyrios Runner Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Runner Pro</h3>
+                        <p class="product-model">MODELO KY0135x</p>
+                        <ul class="product-features">
+                            <li>Upper de malla técnica transpirable</li>
+                            <li>Suela de EVA de alta densidad</li>
+                            <li>Diseño aerodinámico minimalista</li>
+                            <li>Sistema de amortiguación avanzada</li>
+                            <li>Perfecta para largas distancias</li>
+                        </ul>
+                        <p class="product-model">PM: 1200 x 2</p>
+                        35 / 40 Eur.
+                        <p class="product-model">Gs. 194.100</p>
+                        39 / 45 Eur.
+                        <p class="product-model">Gs. 199.300</p>
+                    </div>
+                </div>
+
+                <!-- Product 2: White/Gray -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/0764/0082/0470/files/2.jpg?v=1770314734" viewBox='0 0 400 300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' fill='%23444' text-anchor='middle'%3EKYRIOS VELOCITY%3C/text%3E%3C/svg%3E" alt="Kyrios Velocity">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Velocity</h3>
+                        <p class="product-model">MODELO KY0139</p>
+                        <ul class="product-features">
+                            <li>Construcción ultra ligera</li>
+                            <li>Suela con tecnología de retorno de energía</li>
+                            <li>Diseño bicolor elegante</li>
+                            <li>Máxima ventilación lateral</li>
+                            <li>Ideal para entrenamientos intensivos</li>
+                        </ul>
+                        <p class="product-model">PM: 1200 x 2</p>
+                        35 / 40 Eur.
+                        <p class="product-model">Gs. 246.500</p>
+                        39 / 45 Eur.
+                        <p class="product-model">Gs. 251.700</p>
+                    </div>
+                </div>
+
+                <!-- Product 3: Gray/White -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://cdn.shopify.com/s/files/1/0764/0082/0470/files/3.jpg?v=1770314734" viewBox='0 0 400 300'%3E%3Crect fill='%23111' width='400' height='300'/%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' fill='%23444' text-anchor='middle'%3EKYRIOS APEX%3C/text%3E%3C/svg%3E" alt="Kyrios Apex">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Apex</h3>
+                        <p class="product-model">MODELO KY0137</p>
+                        <ul class="product-features">
+                            <li>Upper reforzado para máxima durabilidad</li>
+                            <li>Suela multi-densidad con grip superior</li>
+                            <li>Estabilidad optimizada para pronadores</li>
+                            <li>Soporte lateral mejorado</li>
+                            <li>Diseño versátil para todo terreno</li>
+                        </ul>
+                        <p class="product-model">PM: 1200 x 2</p>
+                        35 / 40 Eur.
+                        <p class="product-model">Gs. 194.100</p>
+                        39 / 45 Eur.
+                        <p class="product-model">Gs. 199.300</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-specs">
+        <div class="container">
+            <h2 class="section-title">Tecnología Kyrios</h2>
+            
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <div class="spec-icon">⚡</div>
+                    <h3 class="spec-title">PROPULSIÓN</h3>
+                    <p class="spec-desc">Sistema de retorno de energía para máxima eficiencia en cada zancada</p>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-icon">🎯</div>
+                    <h3 class="spec-title">ESTABILIDAD</h3>
+                    <p class="spec-desc">Soporte estructural que mantiene tu pisada alineada</p>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-icon">💨</div>
+                    <h3 class="spec-title">TRANSPIRABILIDAD</h3>
+                    <p class="spec-desc">Malla técnica de alta ventilación para mantener tus pies frescos</p>
+                </div>
+                
+                <div class="spec-item">
+                    <div class="spec-icon">🛡️</div>
+                    <h3 class="spec-title">DURABILIDAD</h3>
+                    <p class="spec-desc">Materiales premium diseñados para resistir miles de kilómetros</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">KYRIOS SPORT</div>
+            <p class="footer-text">EXCELENCIA EN RENDIMIENTO DEPORTIVO</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll animation for product cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.spec-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
